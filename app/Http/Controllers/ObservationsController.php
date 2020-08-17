@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Observation;
 use Illuminate\Http\Request;
 
 class ObservationsController extends Controller
@@ -13,7 +14,8 @@ class ObservationsController extends Controller
      */
     public function index()
     {
-        //
+        $observations = Observation::all();
+        Return view('observations.index',['observations' =>$observations]);
     }
 
     /**
