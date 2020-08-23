@@ -17,7 +17,7 @@ class ObservationsController extends Controller
      */
     public function index()
     {
-        $observations = Observation::all();
+        $observations = Observation::where('active', '=', true)->get();
         Return view('observations.index',['observations' =>$observations]);
     }
 
@@ -126,7 +126,8 @@ class ObservationsController extends Controller
     public function destroy($id)
     {
         $o = Observation::find($id);
-        $o ->delete();
+        $o->active = false;
+        $o ->touch();
         return redirect('/observations');
     }
 
