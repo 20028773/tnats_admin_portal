@@ -22,3 +22,4 @@ Auth::routes();
 
 Route::resource('/observations', 'ObservationsController');
 Route::get('/observations/{observations}/destroy', 'ObservationsController@destroy');
+Route::get('/observations/{id}/fetch_image', 'ObservationsController@fetch_image');

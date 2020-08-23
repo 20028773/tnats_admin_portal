@@ -20,6 +20,7 @@
                 <th scope="col">Notes</th>
                 <th scope="col">Observer</th>
                 <th scope="col">Approval</th>
+                <th scope="col">Photo</th>
                 <th scope="col">Action</th>
             </tr>
             </thead>
@@ -27,8 +28,14 @@
                 @foreach($observations as $o)
                     <tr>
                         <td>{{$o->id}}</td>
-                        <td>{{$o->rate}}</td>
-                        <td>{{$o->description}}</td>
+                        <td>{{$o->created_at}}</td>
+                        <td>{{$o->location}}</td>
+                        <td>{{$o->species}}</td>
+                        <td>{{$o->notes}}</td>
+                        <td>{{$o->user_id}}</td>
+                        <td>{{$o->approved}}</td>
+                        <td><img src="/observations/{{$o->id}}/fetch_image" style="width: 200px; height: 200px; "></td>
+
                         <td>
 {{--                            <a href='{{url("/observations/{$o->id}")}}' class="btn btn-success">Show</a>--}}
                             <a href='{{url("/observations/{$o->id}/edit")}}' class="btn btn-primary">Edit</a>

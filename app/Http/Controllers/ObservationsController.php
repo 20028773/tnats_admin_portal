@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Observation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use App\Images;
+use Image;
 
 class ObservationsController extends Controller
 {
@@ -25,7 +28,12 @@ class ObservationsController extends Controller
      */
     public function create()
     {
-        //
+        /*
+        $hr = HotelRoom::where('active','=',true)->get();
+        $u = User::where('user_type_id','=', 1)->get();
+        $guestsList = range(1,10);
+*/
+        return view('observations.create');
     }
 
     /**
@@ -36,7 +44,43 @@ class ObservationsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if (request('id') == null) {
+            $o = new Observation();
+
+            $o->user_id = 1;
+            $o->species = request('oSpecies');
+            $o->notes = request('oNotes');
+            $o->approved = false;
+            $o->active = true;
+            $o->created_at = now();
+
+
+
+            if (request('oPhoto') != null) {
+
+                $request->validate(
+                    [
+                        'oPhoto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+                    ]
+                );
+
+                $file_ext = request('oPhoto')->getClientOriginalExtension();
+                var_dump($file_ext);
+
+                $image = Image::make(request('oPhoto'));
+
+                Response::make($image->encode('jpeg'));
+
+                $photoFile = $o->user_id . '_photo_' . time() . '.' . $file_ext;
+
+                request('oPhoto')->storeAs('/images/', $photoFile, 'public');
+
+                $o->photo = $image;
+            }
+            $o->save();
+        }
+
+        return redirect('/observations');
     }
 
     /**
@@ -82,5 +126,18 @@ class ObservationsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    function fetch_image($id)
+    {
+        $o = Observation::find($id);
+
+        $image_file = Image::make($o->photo);
+
+        $response = Response::make($image_file->encode('jpeg'));
+
+        $response->header('Content-Type', 'image/jpeg');
+
+        return $response;
     }
 }

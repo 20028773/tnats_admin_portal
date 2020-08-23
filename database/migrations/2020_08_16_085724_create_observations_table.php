@@ -16,8 +16,8 @@ class CreateObservationsTable extends Migration
         Schema::create('observations', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->string('location');
-            $table->point('geolocation');
+            $table->string('location')->nullable();
+            $table->point('geolocation')->nullable();
             $table->string('species');
             $table->string('notes');
             $table->binary('photo')->nullable();
