@@ -125,7 +125,9 @@ class ObservationsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $o = Observation::find($id);
+        $o ->delete();
+        return redirect('/observations');
     }
 
     function fetch_image($id)
