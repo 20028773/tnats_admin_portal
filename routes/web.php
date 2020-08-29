@@ -23,3 +23,10 @@ Auth::routes();
 Route::resource('/observations', 'ObservationsController');
 Route::get('/observations/{observations}/destroy', 'ObservationsController@destroy');
 Route::get('/observations/{id}/fetch_image', 'ObservationsController@fetch_image');
+
+Route::resource('/users','UserController');
+Route::get('/users/{user}/delete',['as'=>'users.delete','uses'=>'UserController@delete']);
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
