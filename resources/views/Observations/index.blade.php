@@ -33,11 +33,10 @@
                         <td>{{$o->species}}</td>
                         <td>{{$o->notes}}</td>
                         <td>{{$o->user_id}}</td>
-                        <td>{{$o->approved}}</td>
+                        <td>{{( ($o->approved==0) ? "Pending Approval" : (($o->approved==1) ? "Approved" : "Rejected" ))}}</td>
                         <td><img src="/observations/{{$o->id}}/fetch_image" style="width: 200px; height: 200px; "></td>
 
                         <td>
-{{--                            <a href='{{url("/observations/{$o->id}")}}' class="btn btn-success">Show</a>--}}
                             <a href='{{url("/observations/{$o->id}/edit")}}' class="btn btn-primary">Edit</a>
                             <a href='{{url("/observations/{$o->id}/destroy")}}' class="btn btn-danger">Delete</a>
                         </td>

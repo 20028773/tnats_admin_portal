@@ -20,11 +20,12 @@ class CreateObservationsTable extends Migration
             $table->point('geolocation')->nullable();
             $table->string('species');
             $table->string('notes');
-            $table->binary('photo')->nullable();
             $table->boolean('approved');
             $table->boolean('active');
             $table->timestamps();
         });
+
+        DB::statement("ALTER TABLE observations ADD photo  LONGBLOB");
     }
 
     /**

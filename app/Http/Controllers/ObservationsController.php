@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Response;
 use App\Images;
 use Image;
 
+use function Sodium\add;
+
 class ObservationsController extends Controller
 {
     /**
@@ -54,18 +56,15 @@ class ObservationsController extends Controller
             $o->active = true;
             $o->created_at = now();
 
-
-
             if (request('oPhoto') != null) {
 
                 $request->validate(
                     [
-                        'oPhoto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:1024',
+                        'oPhoto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:100024',
                     ]
                 );
 
-                $file_ext = request('oPhoto')->getClientOriginalExtension();
-                var_dump($file_ext);
+                $file_ext = request('oPhoto')->getClientOriginalExtension(); 
 
                 $image = Image::make(request('oPhoto'));
 
@@ -74,10 +73,21 @@ class ObservationsController extends Controller
                 $photoFile = $o->user_id . '_photo_' . time() . '.' . $file_ext;
 
                 request('oPhoto')->storeAs('/images/', $photoFile, 'public');
-
+                
                 $o->photo = $image;
             }
+            
             $o->save();
+        }
+        else{
+            $o = Observation::find(request('id'));
+
+            $o->species = request('oSpecies');
+            $o->notes = request('oNotes');
+            $o->approved = request('oApproved');
+            $o->updated_at = now();
+
+            $o->touch();
         }
 
         return redirect('/observations');
@@ -102,7 +112,14 @@ class ObservationsController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        $o = Observation::find($id);
+     //   $hr = HotelRoom::where('active','=',true)->get();
+     //   $u = User::where('user_type_id','=', 1)->get();
+     //   $guestsList = range(1,10);
+        $list = array("1"=>"Approve", "2"=>"Reject");
+
+        return view('observations.update', compact('o', 'list'));
     }
 
     /**
