@@ -53,4 +53,11 @@ class UserController extends Controller
         $user->delete();
         return redirect('/users');
     }
+
+    public function search(Request $request)
+    {
+        $data = User::select("name as name","email as email","name as desc")->where("names","LIKE","%{$request->input('query')}%")->get();
+
+        return response()->json($data);
+    }
 }

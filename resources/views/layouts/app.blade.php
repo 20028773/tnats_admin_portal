@@ -49,20 +49,14 @@
                                 </li>
                             @endif
                         @else
-                            @if(Auth::user()->user_type_id == 5 || Auth::user()->user_type_id == 6)
+                            @if(Auth::user()->user_type_id == 5 || Auth::user())
                                 <li class="nav-item dropdown">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                         Management <span class="caret"></span>
                                     </a>
 
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href='{{url("/rates")}}'>Rates</a>
-                                        <a class="dropdown-item" href='{{url("/feedbackSubjects")}}'>Feedback Subjects</a>
-                                        <a class="dropdown-item" href='{{url("/roomStatuses")}}'>Room Statuses</a>
-                                        <a class="dropdown-item" href='{{url("/userTypes")}}'>User Types</a>
                                         <a class="dropdown-item" href='{{url("/users")}}'>Users</a>
-                                        <a class="dropdown-item" href='{{url("/hotelRooms")}}'>Rooms</a>
-                                        <a class="dropdown-item" href='{{url("/bookings")}}'>Bookings</a>
                                     </div>
                                 </li>
                             @endif

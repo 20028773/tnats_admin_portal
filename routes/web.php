@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\User;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +28,10 @@ Route::get('/observations/{id}/fetch_image', 'ObservationsController@fetch_image
 
 Route::resource('/users','UserController');
 Route::get('/users/{user}/delete',['as'=>'users.delete','uses'=>'UserController@delete']);
+Route::get('/search',['as'=>'users.search','uses'=>'UserController@search']);
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
