@@ -10,7 +10,7 @@ use Image;
 
 use function Sodium\add;
 
-class ObservationsController extends Controller
+class ObsAPIController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -46,50 +46,72 @@ class ObservationsController extends Controller
      */
     public function store(Request $request)
     {
-        if (request('id') == null) {
-            $o = new Observation();
 
-            $o->guid = "1as5d5as44das544d54asd";
-            $o->user_id = 1;
-            $o->species = request('oSpecies');
-            $o->notes = request('oNotes');
-            $o->approved = false;
-            $o->active = true;
-            $o->created_at = now();
+        $o = new Observation();
+        $o->guid = $request->guid;
+        $o->user_id = $request->user_id;
+        $o->species = $request->species;
+        $o->notes = $request->notes;
+        $o->approved = $request->approved;
+        $o->active = $request->active;
+        $o->photo = $request->photo;
+        $o->created_at = now();
 
-            if (request('oPhoto') != null) {
+        $o->save();
 
-                $request->validate(
-                    [
-                        'oPhoto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:100024',
-                    ]
-                );
-
-                $file_ext = request('oPhoto')->getClientOriginalExtension();
-
-                $image = Image::make(request('oPhoto'));
-
-                Response::make($image->encode('jpeg'));
-
-                $photoFile = $o->user_id . '_photo_' . time() . '.' . $file_ext;
-
-                request('oPhoto')->storeAs('/images/', $photoFile, 'public');
-
-                $o->photo = $image;
-            }
-
-            $o->save();
-        }
-        else{
-            $o = Observation::find(request('id'));
-
-            $o->species = request('oSpecies');
-            $o->notes = request('oNotes');
-            $o->approved = request('oApproved');
-            $o->updated_at = now();
-
-            $o->touch();
-        }
+        return response([
+                            'guid' => $request->guid,
+                            'user_id' => $request->user_id,
+                            'location' => $request->location,
+                            'species' => $request->species,
+                            'notes' => $request->notes,
+                            'approved' => $request->approved,
+                            'active' => $request->active,
+                            'message' => 'Retrieved Successfully',
+                        ], 200);
+//        if (request('id') == null) {
+//            $o = new Observation();
+//
+//            $o->user_id = 1;
+//            $o->species = request('oSpecies');
+//            $o->notes = request('oNotes');
+//            $o->approved = false;
+//            $o->active = true;
+//            $o->created_at = now();
+//
+//            if (request('oPhoto') != null) {
+//
+//                $request->validate(
+//                    [
+//                        'oPhoto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:100024',
+//                    ]
+//                );
+//
+//                $file_ext = request('oPhoto')->getClientOriginalExtension();
+//
+//                $image = Image::make(request('oPhoto'));
+//
+//                Response::make($image->encode('jpeg'));
+//
+//                $photoFile = $o->user_id . '_photo_' . time() . '.' . $file_ext;
+//
+//                request('oPhoto')->storeAs('/images/', $photoFile, 'public');
+//
+//                $o->photo = $image;
+//            }
+//
+//            $o->save();
+//        }
+//        else{
+//            $o = Observation::find(request('id'));
+//
+//            $o->species = request('oSpecies');
+//            $o->notes = request('oNotes');
+//            $o->approved = request('oApproved');
+//            $o->updated_at = now();
+//
+//            $o->touch();
+//        }
 
         return redirect('/observations');
     }
@@ -100,9 +122,12 @@ class ObservationsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(CEO $ceo)
     {
-        //
+        return response([
+                            'ceo' => new CEOResource($ceo),
+                            'message' => 'Retrieved Successfully',
+                        ], 200);
     }
 
     /**

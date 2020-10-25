@@ -15,13 +15,15 @@ class CreateObservationsTable extends Migration
     {
         Schema::create('observations', function (Blueprint $table) {
             $table->id();
+            $table->string('guid')->unique();
             $table->integer('user_id');
             $table->string('location')->nullable();
-            $table->point('geolocation')->nullable();
             $table->string('species');
             $table->string('notes');
             $table->boolean('approved');
             $table->boolean('active');
+            $table->double('longitude')->nullable();
+            $table->double('latitude')->nullable();
             $table->timestamps();
         });
 

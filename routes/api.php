@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::apiResource('/addObs', 'ObsAPIController')->middleware('auth:api');
+
 Route::post('register','PassportAuthController@register');
 Route::post('login','PassportAuthController@login');
 Route::middleware('auth:api')->group(function (){
