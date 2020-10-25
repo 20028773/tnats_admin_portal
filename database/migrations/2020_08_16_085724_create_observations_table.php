@@ -19,8 +19,7 @@ class CreateObservationsTable extends Migration
             $table->integer('user_id');
             $table->string('location')->nullable();
             $table->string('species');
-            $table->string('notes');
-            //$table->longText('photo');
+            $table->string('notes'); 
             $table->boolean('approved');
             $table->boolean('active');
             $table->double('longitude')->nullable();
