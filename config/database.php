@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Str;
 
-$DATABASE_URL='mysql://baa421773e7559:a0bcb289@us-cdbr-east-02.cleardb.com/heroku_b5625aa3109e28a?reconnect=true';
+$DATABASE_URL='mysql://awy6ou40g3psk4zc:ro38r22en5vdtkna@klbcedmmqp7w17ik.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/c6kchjebv0p9dvam';
 
 return [
 
@@ -45,44 +45,44 @@ return [
             'foreign_key_constraints' => env('DB_FOREIGN_KEYS', true),
         ],
 
-//       'mysql' => [
-//           'driver' => 'mysql',
-//           'url' => $DATABASE_URL,
-//           'host' => 'us-cdbr-east-02.cleardb.com',
-//           'port' => '3306',
-//           'database' => 'heroku_b5625aa3109e28a',
-//           'username' => 'baa421773e7559',
-//           'password' => 'a0bcb289',
-//           'unix_socket' => env('DB_SOCKET', ''),
-//           'charset' => 'utf8mb4',
-//           'collation' => 'utf8mb4_unicode_ci',
-//           'prefix' => '',
-//           'prefix_indexes' => true,
-//           'strict' => true,
-//           'engine' => null,
-//           'options' => extension_loaded('pdo_mysql') ? array_filter([
-//               PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-//           ]) : [],
-//       ],
-        'mysql' => [
-            'driver' => 'mysql',
-            'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
-            'unix_socket' => env('DB_SOCKET', ''),
-            'charset' => 'utf8mb4',
-            'collation' => 'utf8mb4_unicode_ci',
-            'prefix' => '',
-            'prefix_indexes' => true,
-            'strict' => true,
-            'engine' => null,
-            'options' => extension_loaded('pdo_mysql') ? array_filter([
-                                                                          PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
-                                                                      ]) : [],
-        ],
+       'mysql' => [
+           'driver' => 'mysql',
+           'url' => $DATABASE_URL,
+           'host' => 'klbcedmmqp7w17ik.cbetxkdyhwsb.us-east-1.rds.amazonaws.com	',
+           'port' => '3306',
+           'database' => 'c6kchjebv0p9dvam',
+           'username' => 'awy6ou40g3psk4zc',
+           'password' => 'ro38r22en5vdtkna',
+           'unix_socket' => env('DB_SOCKET', ''),
+           'charset' => 'utf8mb4',
+           'collation' => 'utf8mb4_unicode_ci',
+           'prefix' => '',
+           'prefix_indexes' => true,
+           'strict' => true,
+           'engine' => null,
+           'options' => extension_loaded('pdo_mysql') ? array_filter([
+               PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+           ]) : [],
+       ],
+//        'mysql' => [
+//            'driver' => 'mysql',
+//            'url' => env('DATABASE_URL'),
+//            'host' => env('DB_HOST', '127.0.0.1'),
+//            'port' => env('DB_PORT', '3306'),
+//            'database' => env('DB_DATABASE', 'forge'),
+//            'username' => env('DB_USERNAME', 'forge'),
+//            'password' => env('DB_PASSWORD', ''),
+//            'unix_socket' => env('DB_SOCKET', ''),
+//            'charset' => 'utf8mb4',
+//            'collation' => 'utf8mb4_unicode_ci',
+//            'prefix' => '',
+//            'prefix_indexes' => true,
+//            'strict' => true,
+//            'engine' => null,
+//            'options' => extension_loaded('pdo_mysql') ? array_filter([
+//                                                                          PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+//                                                                      ]) : [],
+//        ],
 
         'pgsql' => [
             'driver' => 'pgsql',
