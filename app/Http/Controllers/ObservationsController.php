@@ -49,7 +49,7 @@ class ObservationsController extends Controller
         if (request('id') == null) {
             $o = new Observation();
 
-            $o->guid = "1as5d5as44das544d54asd";
+            $o->guid = "1as5d5as44das544d54asd1";
             $o->user_id = 1;
             $o->species = request('oSpecies');
             $o->notes = request('oNotes');
