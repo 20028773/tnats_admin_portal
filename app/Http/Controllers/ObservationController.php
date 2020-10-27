@@ -8,9 +8,8 @@ use Illuminate\Support\Facades\Response;
 use App\Images;
 use Image;
 
-use function Sodium\add;
 
-class ObservationsController extends Controller
+class ObservationController extends Controller
 {
     /**
      * Display a listing of the resource.

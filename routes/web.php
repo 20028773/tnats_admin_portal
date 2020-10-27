@@ -24,9 +24,9 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
 
-    Route::resource('/observations', 'ObservationsController');
-    Route::get('/observations/{observations}/destroy', 'ObservationsController@destroy');
-    Route::get('/observations/{id}/fetch_image', 'ObservationsController@fetch_image');
+    Route::resource('/observations', 'ObservationController');
+    Route::get('/observations/{observations}/destroy', 'ObservationController@destroy');
+    Route::get('/observations/{id}/fetch_image', 'ObservationController@fetch_image');
 
     Route::resource('/users','UserController');
     Route::get('/users/{user}/delete',['as'=>'users.delete','uses'=>'UserController@delete']);
