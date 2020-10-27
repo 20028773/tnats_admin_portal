@@ -18,11 +18,10 @@ use Illuminate\Http\Request;
 Auth::routes();
 
 
-Route::get('/', 'HomeController@index')->name('index');
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+Route::get('/', function () {
+    return view('welcome');
+});
 
 
 Route::group(['middleware' => ['auth']], function () {
