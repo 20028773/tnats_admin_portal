@@ -53,20 +53,20 @@ class ObsAPIController extends Controller
         $o->species = $request->species;
         $o->notes = $request->notes;
         $o->approved = $request->approved;
-        $o->active = $request->active;
-        $o->photo = $request->photo;
         $o->created_at = now();
+        $o->active = $request->active;
+
+        $a = base64_decode($request->location);
+        $b = array();
+        foreach(str_split($a) as $c)
+            $b[] = sprintf("%08b", ord($c));
+
+        $o->photo = $b;
 
         $o->save();
 
         return response([
                             'guid' => $request->guid,
-                            'user_id' => $request->user_id,
-                            'location' => $request->location,
-                            'species' => $request->species,
-                            'notes' => $request->notes,
-                            'approved' => $request->approved,
-                            'active' => $request->active,
                             'message' => 'Retrieved Successfully',
                         ], 200);
 //        if (request('id') == null) {
