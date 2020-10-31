@@ -57,6 +57,7 @@ class ObsAPIController extends Controller
             $o->approved = $request->approved;
             $o->created_at = now();
             $o->active = $request->active;
+            $o->photo_string = "";
 
             $o->save();
         }
