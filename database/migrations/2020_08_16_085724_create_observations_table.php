@@ -24,6 +24,7 @@ class CreateObservationsTable extends Migration
             $table->boolean('active');
             $table->double('longitude')->nullable();
             $table->double('latitude')->nullable();
+            $table->longText('photo_string')->nullable();
             $table->timestamps();
         });
 

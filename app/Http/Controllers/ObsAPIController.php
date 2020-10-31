@@ -47,28 +47,42 @@ class ObsAPIController extends Controller
     public function store(Request $request)
     {
 
-        $o = new Observation();
-        $o->guid = $request->guid;
-        $o->user_id = $request->user_id;
-        $o->species = $request->species;
-        $o->notes = $request->notes;
-        $o->approved = $request->approved;
-        $o->created_at = now();
-        $o->active = $request->active;
+        if ($request->user_id != null) {
+            $o = new Observation();
+            $o->guid = $request->guid;
+            $o->user_id = $request->user_id;
+            $o->location = $request->location;
+            $o->species = $request->species;
+            $o->notes = $request->notes;
+            $o->approved = $request->approved;
+            $o->created_at = now();
+            $o->active = $request->active;
 
-        $a = base64_decode($request->location);
-        $b = array();
-        foreach(str_split($a) as $c)
-            $b[] = sprintf("%08b", ord($c));
+            $o->save();
+        }
+        else {
+            $o = Observation::where('guid', '=', $request->guid)->get();
 
-        $o->photo = $b;
+            $o->photo_string = $request->photo_string;
 
-        $o->save();
+            if ($request->end_of_photo == "true") {
+                $a = base64_decode($o->photo_string);
+                $b = array();
+                foreach (str_split($a) as $c) {
+                    $b[] = sprintf("%08b", ord($c));
+                }
+                $o->photo = $b;
+                $o->photo_string = null;
+            }
+
+            $o->touch();
+        }
 
         return response([
                             'guid' => $request->guid,
                             'message' => 'Retrieved Successfully',
                         ], 200);
+
 //        if (request('id') == null) {
 //            $o = new Observation();
 //
