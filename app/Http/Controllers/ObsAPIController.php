@@ -62,7 +62,7 @@ class ObsAPIController extends Controller
             $o->save();
         }
         else {
-            $o = Observation::where('guid', '=', $request->guid)->get();
+            $o = Observation::where('guid', '=', $request->guid)->firstOrFail();
 
             $o->photo_string = $o->photo_string . $request->photo_string;
 
