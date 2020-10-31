@@ -63,7 +63,7 @@ class ObsAPIController extends Controller
         else {
             $o = Observation::where('guid', '=', $request->guid)->get();
 
-            $o->photo_string = $request->photo_string;
+            $o->photo_string = $o->photo_string . $request->photo_string;
 
             if ($request->end_of_photo == "true") {
                 $a = base64_decode($o->photo_string);
