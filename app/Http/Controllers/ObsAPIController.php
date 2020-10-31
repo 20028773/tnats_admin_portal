@@ -72,7 +72,7 @@ class ObsAPIController extends Controller
                 foreach (str_split($a) as $c) {
                     $b[] = sprintf("%08b", ord($c));
                 }
-                $o->photo = $b;
+                $o->photo = $a;
                 $o->photo_string = null;
             }
 
