@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Observation;
+use App\Locations;
+use App\Species;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\Images;
@@ -96,10 +98,22 @@ class ObsAPIController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(CEO $ceo)
+    public function getLocations()
     {
+        $locations = Locations::all();
+
         return response([
-                            'ceo' => new CEOResource($ceo),
+                            'locations' => $locations,
+                            'message' => 'Retrieved Successfully',
+                        ], 200);
+    }
+
+    public function geSpecies()
+    {
+        $species = Species::all();
+
+        return response([
+                            'species' => $species,
                             'message' => 'Retrieved Successfully',
                         ], 200);
     }
