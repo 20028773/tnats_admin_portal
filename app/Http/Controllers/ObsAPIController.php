@@ -46,6 +46,7 @@ class ObsAPIController extends Controller
      */
     public function store(Request $request)
     {
+        $message = 'Success';
 
         if ($request->user_id != null) {
             $o = new Observation();
@@ -68,65 +69,23 @@ class ObsAPIController extends Controller
 
             if ($request->end_of_photo == "true") {
                 $a = base64_decode($o->photo_string);
-                $b = array();
-                foreach (str_split($a) as $c) {
-                    $b[] = sprintf("%08b", ord($c));
-                }
+
                 $o->photo = $a;
                 $o->photo_string = null;
             }
 
             $o->touch();
+
+            if ($request->end_of_photo == "true") {
+                $message = 'Photo Inserted';
+            }
         }
 
         return response([
                             'guid' => $request->guid,
-                            'message' => 'Retrieved Successfully',
+                            'message' => $message,
                         ], 200);
 
-//        if (request('id') == null) {
-//            $o = new Observation();
-//
-//            $o->user_id = 1;
-//            $o->species = request('oSpecies');
-//            $o->notes = request('oNotes');
-//            $o->approved = false;
-//            $o->active = true;
-//            $o->created_at = now();
-//
-//            if (request('oPhoto') != null) {
-//
-//                $request->validate(
-//                    [
-//                        'oPhoto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:100024',
-//                    ]
-//                );
-//
-//                $file_ext = request('oPhoto')->getClientOriginalExtension();
-//
-//                $image = Image::make(request('oPhoto'));
-//
-//                Response::make($image->encode('jpeg'));
-//
-//                $photoFile = $o->user_id . '_photo_' . time() . '.' . $file_ext;
-//
-//                request('oPhoto')->storeAs('/images/', $photoFile, 'public');
-//
-//                $o->photo = $image;
-//            }
-//
-//            $o->save();
-//        }
-//        else{
-//            $o = Observation::find(request('id'));
-//
-//            $o->species = request('oSpecies');
-//            $o->notes = request('oNotes');
-//            $o->approved = request('oApproved');
-//            $o->updated_at = now();
-//
-//            $o->touch();
-//        }
 
         return redirect('/observations');
     }
