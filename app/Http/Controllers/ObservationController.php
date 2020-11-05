@@ -143,8 +143,7 @@ class ObservationController extends Controller
     public function destroy($id)
     {
         $o = Observation::find($id);
-        $o->active = false;
-        $o ->touch();
+        $o ->delete();
         return redirect('/observations');
     }
 
