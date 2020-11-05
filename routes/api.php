@@ -15,13 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::apiResource('/addObs', 'ObsAPIController')->middleware('auth:api');
-Route::apiResource('/getLocations', 'ObsAPIController@getLocations')->middleware('auth:api');
-Route::apiResource('/geSpecies', 'ObsAPIController@geSpecies')->middleware('auth:api');
 
 Route::post('register','PassportAuthController@register');
 Route::post('login','PassportAuthController@login');
 
 Route::middleware('auth:api')->group(function (){
+    Route::get('/getLocations', 'ObsAPIController@getLocations');
+    Route::get('/getSpecies', 'ObsAPIController@getSpecies');
     Route::resource('posts','PostController');
     Route::resource('users','UserManagementController');
 });

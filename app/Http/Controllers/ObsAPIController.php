@@ -108,7 +108,7 @@ class ObsAPIController extends Controller
                         ], 200);
     }
 
-    public function geSpecies()
+    public function getSpecies()
     {
         $species = Species::all();
 
