@@ -53,7 +53,7 @@ class ObsAPIController extends Controller
         if ($request->user_id != null) {
             $o = new Observation();
             $o->guid = $request->guid;
-            $o->user_id = $request->user_id;
+            $o->user_id = $request->user()->id;
             $o->location = $request->location;
             $o->species = $request->species;
             $o->notes = $request->notes;
