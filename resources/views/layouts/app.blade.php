@@ -58,6 +58,10 @@
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href='{{url("/users")}}'>Users</a>
                                     </div>
+
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href='{{url("/observations")}}'>Observations</a>
+                                    </div>
                                 </li>
                             @endif
 

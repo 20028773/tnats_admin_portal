@@ -83,10 +83,6 @@
                 <div class="title m-b-md">
                     TNATS ADMIN PORTAL
                 </div>
-
-                <div class="links">
-                    <a href='{{url("/observations")}}'>Observations</a>
-                </div>
             </div>
         </div>
     </body>
