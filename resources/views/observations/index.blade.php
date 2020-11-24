@@ -32,7 +32,7 @@
                         <td>{{$o->location}}</td>
                         <td>{{$o->species}}</td>
                         <td>{{$o->notes}}</td>
-                        <td>{{$o->user_id}}</td>
+                        <td>{{$users->firstWhere('id','=',$o->user_id)->name}}</td>
                         <td>{{( ($o->approved==0) ? "Pending Approval" : (($o->approved==1) ? "Approved" : "Rejected" ))}}</td>
                         <td><img src="/observations/{{$o->id}}/fetch_image" style="width: 200px; height: 200px; "></td>
 

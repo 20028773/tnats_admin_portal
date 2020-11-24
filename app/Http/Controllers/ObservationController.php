@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Observation;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 use App\Images;
@@ -19,7 +20,8 @@ class ObservationController extends Controller
     public function index()
     {
         $observations = Observation::where('active', '=', true)->get();
-        Return view('observations.index',['observations' =>$observations]);
+        $users = User::all();
+        Return view('observations.index',['observations' => $observations, 'users' => $users]);
     }
 
     /**
